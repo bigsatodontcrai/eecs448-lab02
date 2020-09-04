@@ -115,19 +115,38 @@ bool LinkedList<T>::removeBack()
 		Fix this method
 	*/
 	Node<T>* temp = m_front;
-	for(int i = 1; i < m_size; i++)
-	{
-		temp = temp -> getNext();
+
+	
+	
+	if(m_size > 1)
+	{	
+		for(int i = 0; i < m_size - 2; i++)
+		{
+
+			temp = temp -> getNext();
+		}
+
+		lastNode = temp -> getNext();
+		secondintoLast = temp;
+
+		secondintoLast -> setNext(nullptr);
+		delete lastNode;
+		m_size--;
+		isRemoved = true;
+
+		return(isRemoved);
 	}
-
-	lastNode = temp -> getNext();
-	secondintoLast = temp;
-
-	secondintoLast -> setNext(nullptr);
-	delete lastNode;
-	isRemoved = true;
-
-	return(isRemoved);
+	else if (m_size == 1)
+	{
+		delete m_front;
+		m_size--;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+	
 }	
 
 template <typename T>
